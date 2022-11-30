@@ -15,3 +15,17 @@ The number convertion was pretty much the same.<br><br>
 Numbers to binary and back is not.</b><br><br>
 
 You have a easter bunny if you want to dig into it.
+
+
+# How to make this work
+
+copy and paste the code bellow to your html file<br><br>
+<textarea name="keys" id="keys" placeholder="Paste or write your text. Click the button and convert text to binary."></textarea>
+<div class="buttons">
+    <button id="translate" action="tobinary">Text to Binary</button>
+    <button id="swap">Swap conversion</button>
+    <button id="textToNumbers" action="texttonumbers">Convert Numbers</button>
+</div>
+<div id="result"></div><br><br>
+
+include jquery and js file on your html file and you're good to go.
