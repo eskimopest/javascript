@@ -4,7 +4,7 @@ text to binary, binary to text, numebrs to binary and binary to numbers<br><br>
 
 Created this project cause i was studying how to convert text and numbers to binary.
 
-This project was created following the steps of conversion. I dindn't use the toString() function.<br>
+This project was created following the steps of conversion. I dindn't use the toString() method.<br>
 First needed to get the keyCodes of the characters.<br>
 Then, made the math with 128, 64, 32, 16, 8, 4, 2, 1.<br>
 And finally, i got the 1s and 0s i needed.
@@ -28,5 +28,5 @@ copy and paste the code bellow to your html file<br><br>
     <button id="textToNumbers" action="texttonumbers">Convert Numbers</button>
 </div>
 <div id="result"></div>
-```
+```<br><br>
 include jquery and js file on your html file and you're good to go.
