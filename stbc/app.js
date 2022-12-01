@@ -1,72 +1,5 @@
 $(function() {
 
-    const items = $('nav a')
-    items.on('click', function(e) {
-        e.preventDefault();
-    })
-
-
-    // TAKING CARE OF THE MENU
-    const howTo = $('.howTo')
-    const about = $('.aboutProj')
-
-    howTo.on('click', function(e) {
-        e.stopPropagation()
-
-        const block = $('.about')
-        const navLi = $('.aboutProj')
-        const item = $('.how-to')
-
-        block.animate({'top': '-200vh'}, 200)
-        block.removeClass('active')
-        navLi.removeClass('active')
-
-        if(howTo.hasClass('active')) {
-            item.animate({'top': '-200vh'}, 200)
-            item.removeClass('active')
-            howTo.removeClass('active')
-        }
-        else {
-            item.animate({'top': '60px'}, 200)
-            item.addClass('active')
-            howTo.addClass('active')
-        }
-    })
-    about.on('click', function(e) {
-        e.stopPropagation()
-
-        const block = $('.how-to')
-        const navLi = $('.howTo')
-        const item = $('.about')
-
-        block.animate({'top': '-200vh'}, 200)
-        block.removeClass('active')
-        navLi.removeClass('active')
-
-        if(item.hasClass('active')) {
-            item.animate({'top': '-200vh'}, 200)
-            item.removeClass('active')
-            about.removeClass('active')
-        }
-        else {
-            item.animate({'top': '60px'}, 200)
-            item.addClass('active')
-            about.addClass('active')
-        }
-    })
-    // menu active on click outside areas
-    $('body').on('click', function(e) {
-        const block = $('.block')
-        const isHover = $('.block:hover').length
-        const menu = $('nav ul li')
-        if(menu.hasClass('active') && isHover === 0) {
-            menu.removeClass('active')
-            block.animate({'top': '-200vh'}, 200)
-            block.removeClass('active')
-        } 
-    })
-
-
     // TRANSLATE TEXT TO BINARY AND BACK
     $('#translate').on('click', function() {
         let action = $('#translate').attr('action')
@@ -119,24 +52,6 @@ $(function() {
     })
 
 
-    // SWAP HOW TO
-    const slideSwap = $('.how-to h2 span')
-    slideSwap.on('click', function(e) {
-        const text = $('#textToBinary')
-        const numbers = $('#numbersToBinary')
-        if(text.hasClass('active')) {
-            text.removeClass('active')
-            numbers.addClass('active')
-            slideSwap.text('> How to convert text')
-        }
-        else {
-            numbers.removeClass('active')
-            text.addClass('active')
-            slideSwap.text('> How to convert numbers')
-        }
-    })
-
-
     // CONVERT NUMBERS TO BINARY
     let conNum = $('#textToNumbers')
     conNum.on('click', function() {
@@ -156,14 +71,7 @@ $(function() {
         }
 
     })
-    
-    
 
-    // CLOSE EASTER EGG
-    $('.easter-egg').on('click', function() {
-        $(this).fadeOut(200)
-        $('.bin-clock').text('')
-    })
 });
 
 
@@ -178,20 +86,10 @@ function translateToBinary() {
     const charCodes = []
     const binaryArray = []
 
-    if(easter == 'time') {
-        // BINARY CLOCK
-        clock();
-        const binClock = setInterval(function() {
-            clock();
-        }, 1000)
-        $('.easter-egg').fadeIn(200).css('display', 'flex')
-    }
-
     $.each(chars, function(i, letter) {
         charCodes.push(letter.charCodeAt())
     })
 
-    //console.log(charCodes)
     
     
     $.each(charCodes, function(i, code) {
@@ -225,8 +123,6 @@ function translateToText() {
     let chars = input.val().split(" ")
     const charCodes = []
     let text = ''
-    
-    //console.log(chars)
 
     $.each(chars, function(i, digits) {
         const b = bits.length
@@ -239,8 +135,6 @@ function translateToText() {
         }
         charCodes.push(total)
     })
-
-    //console.log(charCodes)
 
     $.each(charCodes, function(i, code) {
         text += String.fromCharCode(code);
@@ -306,36 +200,3 @@ function populateArray(array, quot) {
     }
 }
 
-
-function clock() {
-    const clock = $('.bin-clock')
-
-    const dt = new Date();
-    const hrs = dt.getHours();
-    const min = dt.getMinutes();
-    const secs = dt.getSeconds();
-
-    const hrsBin = []
-    const minBin = []
-    const secBin = []
-
-    let hrsQuot = hrs
-    let minQuot = min
-    let secQuot = secs
-
-    if(hrs == 0) {
-        hrsBin.push(0)
-    }
-    if(min == 0) {
-        minBin.push(0)
-    }
-    if(secs == 0) {
-        secBin.push(0)
-    }
-
-    populateArray(hrsBin, hrsQuot)
-    populateArray(minBin, minQuot)
-    populateArray(secBin, secQuot)
-
-    clock.text(hrsBin.reverse().join('')+' : '+minBin.reverse().join('')+' : '+secBin.reverse().join(''))
-}
